@@ -34,11 +34,6 @@ app.set('views', './views')
 
 
 
-
-
-
-
-
 const params = {
   'filter[uuid][_eq]': '2b106014-5926-4e19-9707-dc289f0cf526'
 }
@@ -47,11 +42,12 @@ const apiURL = 'https://fdnd-agency.directus.app/items/snappthis_snapmap?fields=
 const snappMap = await fetch(apiURL)
 const snappmapResJSON = await snappMap.json()
 
+
+
 app.get('/', async function (request, response) {
 
   response.render('index.liquid', { snappmaps: snappmapResJSON.data })
 })
-
 
 
 
@@ -61,8 +57,11 @@ app.get('/snapmap/:uuid', async function (request, response) {
   const snap = await fetch(apiURL)
   const snapResJSON = await snap.json()
 
-  console.log(snappmapResJSON.data)
-  response.render('snapdetail.liquid', { snap: snapResJSON.data[0], snappmap: snappmapResJSON.data })
+  const userApiURL = 'https://fdnd-agency.directus.app/items/snappthis_user?filter[uuid][_eq]=' + snapResJSON.data[0].author
+  const user = await fetch(userApiURL)
+  const userResJSON = await user.json()
+
+  response.render('snapdetail.liquid', { snap: snapResJSON.data[0], snappmap: snappmapResJSON.data, user: userResJSON.data[0]})
 })
 
 
