@@ -1,0 +1,21 @@
+{% render 'partials/head.liquid', title: 'Homepage' %}
+
+{% render 'partials/top-navigation.liquid' %}
+<main>
+  <section class="details-section">
+    <a href="/">terug naar home</a>
+    <ul>
+      <li>
+        <button>{{ snappmap[0].name }}</button>
+      </li>
+      <li>
+        <button>{{ snap.location }}</button>
+      </li>
+      <li>
+        <button>{{ snap.author }}</button>
+      </li>
+    </ul>
+    <img src="https://fdnd-agency.directus.app/assets/{{ snap.picture }}">
+  </section>
+</main>
+{% render 'partials/bottom-navigation.liquid' %}
