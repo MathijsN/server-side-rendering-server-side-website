@@ -1,21 +1,10 @@
-{% render 'partials/head.liquid', title: 'Homepage' %}
-
-<main>
-{% render 'partials/top-navigation.liquid' %}
-
-  <ul class="grid-view">
-    {% for snappmap in snappmaps %}
-      {% for snap in snappmap.snaps %}
-        {% if snap.picture != null %}
-          <li>
-            <a href="/snapmap/{{ snap.uuid }}">
-                <img src="https://fdnd-agency.directus.app/assets/{{ snap.picture }}" loading="lazy">
-            </a>
-          </li>
-        {% endif %}
-      {% endfor %}
+<h1>
+    Tijdelijke homepage
+</h1>
+<ul>
+    {% for snappmap in allSnappmaps %}
+        <li>
+            <a href="/snappmaps/{{ snappmap.uuid }}">{{ snappmap.name }}</a>
+        </li>
     {% endfor %}
-  </ul>
-
-  {% render 'partials/bottom-navigation.liquid' %}
-</main>
+</ul>

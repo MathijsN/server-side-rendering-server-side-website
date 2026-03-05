@@ -1,8 +1,6 @@
 import express from 'express'
 import { Liquid } from 'liquidjs';
 
-
-console.log('Hieronder moet je waarschijnlijk nog wat veranderen')
 // Doe een fetch naar de data die je nodig hebt
 // const apiResponse = await fetch('...')
 
@@ -33,39 +31,45 @@ app.engine('liquid', engine.express());
 app.set('views', './views')
 
 
-
-const params = {
-  'filter[uuid][_eq]': '2b106014-5926-4e19-9707-dc289f0cf526'
-}
-
-const apiURL = 'https://fdnd-agency.directus.app/items/snappthis_snapmap?fields=*.*&' + new URLSearchParams(params)
-const snappMap = await fetch(apiURL)
-const snappmapResJSON = await snappMap.json()
-
+const allSnappmapsApiURL = 'https://fdnd-agency.directus.app/items/snappthis_snapmap?fields=*.*'
+const allSnappmaps = await fetch(allSnappmapsApiURL)
+const allSnappmapsResJSON = await allSnappmaps.json()
 
 
 app.get('/', async function (request, response) {
+  response.render('index.liquid', { allSnappmaps: allSnappmapsResJSON.data })
+})
 
-  response.render('index.liquid', { snappmaps: snappmapResJSON.data })
+app.get('/snappmaps/:uuid', async function (request, response) {
+
+  const snappmapFilteredApiURL = 'https://fdnd-agency.directus.app/items/snappthis_snapmap?fields=*.*&filter[uuid][_eq]=' + request.params.uuid
+  const snappmapFiltered = await fetch(snappmapFilteredApiURL)
+  const snappmapFilterResJSON = await snappmapFiltered.json()
+
+
+  response.render('snappmap.liquid', { snappmapsFiltered: snappmapFilterResJSON.data, allSnappmaps: allSnappmapsResJSON.data })
+})
+
+app.get('/snappmaps/filter/:location', async function (request, response) {
+
+  const snappmapLocationApiURL = 'https://fdnd-agency.directus.app/items/snappthis_snap?fields=*.*.*&filter[location][_eq]=' + request.params.location
+  const snappmapLocation = await fetch(snappmapLocationApiURL)
+  const snappmapLocationResJSON = await snappmapLocation.json()
+
+  console.log(snappmapLocationResJSON.data)
+  response.render('snappmap.liquid', { snappmapsFiltered: snappmapLocationResJSON.data })
 })
 
 
 
-app.get('/snapmap/:uuid', async function (request, response) {
+app.get('/snappmaps/snapp/:uuid', async function (request, response) {
 
-  const apiURL = 'https://fdnd-agency.directus.app/items/snappthis_snap?filter[uuid][_eq]=' + request.params.uuid
-  const snap = await fetch(apiURL)
+  const snapApiURL = 'https://fdnd-agency.directus.app/items/snappthis_snap?fields=*.*&filter[uuid][_eq]=' + request.params.uuid
+  const snap = await fetch(snapApiURL)
   const snapResJSON = await snap.json()
 
-  const userApiURL = 'https://fdnd-agency.directus.app/items/snappthis_user?filter[uuid][_eq]=' + snapResJSON.data[0].author
-  const user = await fetch(userApiURL)
-  const userResJSON = await user.json()
-
-  response.render('snapdetail.liquid', { snap: snapResJSON.data[0], snappmap: snappmapResJSON.data, user: userResJSON.data[0]})
+  response.render('snapdetail.liquid', { snap: snapResJSON.data[0] })
 })
-
-
-
 
 
 

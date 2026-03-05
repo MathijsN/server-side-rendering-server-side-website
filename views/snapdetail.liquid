@@ -1,21 +1,28 @@
 {% render 'partials/head.liquid', title: 'Homepage' %}
 
-{% render 'partials/top-navigation.liquid' %}
+{% render 'partials/top-navigation.liquid', title: snap.snapmap.name %}
 <main>
   <section class="details-section">
-    <a href="/">terug naar home</a>
     <ul>
       <li>
-        <a href="#">{{ snappmap[0].name }}</a>
+        <a href="/snappmaps/{{ snap.snapmap.uuid }}">{{ snap.snapmap.name }}</a>
       </li>
       <li>
-        <a href="#">{{ snap.location }}</a>
+        <a href="/snappmaps/filter/{{ snap.location }}">{{ snap.location }}</a>
       </li>
       <li>
-        <a href="#">{{ user.name }}</a>
+        <a href="#">{{ snap.author.name }}</a>
       </li>
     </ul>
-    <img src="https://fdnd-agency.directus.app/assets/{{ snap.picture }}">
+    
+    <ul>
+      <li>
+        {{ snap.date_created | date: '%d %b %Y' }}
+        {{ snap.date_created | date: '%H:%M' }}
+      </li>
+    </ul>
+    
+    <img src="https://fdnd-agency.directus.app/assets/{{ snap.picture.id }}">
   </section>
 </main>
 {% render 'partials/bottom-navigation.liquid' %}
