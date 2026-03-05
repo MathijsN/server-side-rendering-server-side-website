@@ -16,11 +16,13 @@
       {% endfor %}
     {% endfor %}
     {% for snap in snappmapsFiltered %}
+      {% if snap.picture != null %}
       <li>
         <a href="/snappmaps/snapp/{{ snap.uuid }}">
           <img src="https://fdnd-agency.directus.app/assets/{{ snap.picture.id }}" loading="lazy">
         </a>
       </li>
+      {% endif %}
     {% endfor %}
   </ul>
 
