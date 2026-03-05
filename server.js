@@ -40,23 +40,21 @@ app.get('/', async function (request, response) {
   response.render('index.liquid', { allSnappmaps: allSnappmapsResJSON.data })
 })
 
-app.get('/snappmaps/:uuid', async function (request, response) {
+app.get('/snappmaps/filter/:uuid', async function (request, response) {
 
   const snappmapFilteredApiURL = 'https://fdnd-agency.directus.app/items/snappthis_snapmap?fields=*.*&filter[uuid][_eq]=' + request.params.uuid
   const snappmapFiltered = await fetch(snappmapFilteredApiURL)
   const snappmapFilterResJSON = await snappmapFiltered.json()
 
-
   response.render('snappmap.liquid', { snappmapsFiltered: snappmapFilterResJSON.data, allSnappmaps: allSnappmapsResJSON.data })
 })
 
-app.get('/snappmaps/filter/:location', async function (request, response) {
+app.get('/snappmaps/location/:location', async function (request, response) {
 
   const snappmapLocationApiURL = 'https://fdnd-agency.directus.app/items/snappthis_snap?fields=*.*.*&filter[location][_eq]=' + request.params.location
   const snappmapLocation = await fetch(snappmapLocationApiURL)
   const snappmapLocationResJSON = await snappmapLocation.json()
 
-  console.log(snappmapLocationResJSON.data)
   response.render('snappmap.liquid', { snappmapsFiltered: snappmapLocationResJSON.data })
 })
 

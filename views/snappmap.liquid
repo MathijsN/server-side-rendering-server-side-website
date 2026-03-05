@@ -1,7 +1,7 @@
 {% render 'partials/head.liquid', title: 'Homepage' %}
 
 <main>
-{% render 'partials/top-navigation.liquid', title: snappmapsFiltered[0].name, allSnappmaps: allSnappmaps %}
+  {% render 'partials/top-navigation.liquid', title: snappmapsFiltered[0].name, allSnappmaps: allSnappmaps %}
   <h2>Group 2B</h2>
   <ul class="grid-view">
     {% for snappmap in snappmapsFiltered %}
@@ -9,11 +9,18 @@
         {% if snap.picture != null %}
           <li>
             <a href="/snappmaps/snapp/{{ snap.uuid }}">
-                <img src="https://fdnd-agency.directus.app/assets/{{ snap.picture }}" loading="lazy">
+              <img src="https://fdnd-agency.directus.app/assets/{{ snap.picture }}" loading="lazy">
             </a>
           </li>
         {% endif %}
       {% endfor %}
+    {% endfor %}
+    {% for snap in snappmapsFiltered %}
+      <li>
+        <a href="/snappmaps/snapp/{{ snap.uuid }}">
+          <img src="https://fdnd-agency.directus.app/assets/{{ snap.picture.id }}" loading="lazy">
+        </a>
+      </li>
     {% endfor %}
   </ul>
 
