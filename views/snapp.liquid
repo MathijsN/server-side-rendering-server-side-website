@@ -1,0 +1,24 @@
+{% render 'partials/head.liquid', title: 'Homepage' %}
+
+<main>
+  {% render 'partials/top-navigation.liquid', title: snappmapsFiltered[0].name, allSnappmaps: allSnappmaps %}
+
+  <ul>
+    <li>
+      <a href="/snappmaps/{{ snapp.snapmap.uuid }}">{{ snapp.snapmap.name }}</a>
+    </li>
+    <li>
+      <a href="">{{ snapp.author.name }}</a>
+    </li>
+    <li>
+      <a href="">{{ snapp.location }}</a>
+    </li>
+  </ul>
+
+  <img
+    src="https://fdnd-agency.directus.app/assets/{{ snapp.picture.id }}"
+    alt="Image made in {{ snapp.location }}"
+  >
+
+  {% render 'partials/bottom-navigation.liquid' %}
+</main>
