@@ -31,10 +31,10 @@ app.engine('liquid', engine.express());
 app.set('views', './views')
 
 
+
 const allSnappmapsApiURL = 'https://fdnd-agency.directus.app/items/snappthis_snapmap?fields=*.*'
 const allSnappmaps = await fetch(allSnappmapsApiURL)
 const allSnappmapsResJSON = await allSnappmaps.json()
-
 
 app.get('/', async function (request, response) {
   response.render('index.liquid', { allSnappmaps: allSnappmapsResJSON.data })
@@ -58,8 +58,6 @@ app.get('/snappmaps/location/:location', async function (request, response) {
   response.render('snappmap.liquid', { snappmapsFiltered: snappmapLocationResJSON.data })
 })
 
-
-
 app.get('/snappmaps/snapp/:uuid', async function (request, response) {
 
   const snapApiURL = 'https://fdnd-agency.directus.app/items/snappthis_snap?fields=*.*&filter[uuid][_eq]=' + request.params.uuid
@@ -68,6 +66,7 @@ app.get('/snappmaps/snapp/:uuid', async function (request, response) {
 
   response.render('snapdetail.liquid', { snap: snapResJSON.data[0] })
 })
+
 
 
 
@@ -86,3 +85,8 @@ app.listen(app.get('port'), function () {
   // Toon een bericht in de console en geef het poortnummer door
   console.log(`Application started on http://localhost:${app.get('port')}`)
 })
+
+
+
+
+// https://fdnd-agency.directus.app/items/snappthis_group?fields=name,uuid,snappmap.snappthis_snapmap_uuid.*.*.* Alle groups + alle andere velden er in
