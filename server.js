@@ -22,9 +22,6 @@ app.set('views', './views')
 
 
 
-
-
-
 // Snapmaps
 
 const groupsResponse = await fetch('https://fdnd-agency.directus.app/items/snappthis_group?fields=name,uuid,snappmap.snappthis_snapmap_uuid.*.*.*&filter[uuid][_eq]=6d82507e-9bc9-452e-a768-a1bb90d7a37d')
@@ -93,10 +90,9 @@ app.get('/snapps/user/:uuid', async function (request, response) {
   const snappResponse = await fetch('https://fdnd-agency.directus.app/items/snappthis_snap?fields=*.*&filter[author][uuid][_eq]=' + request.params.uuid)
   const snappJSON = await snappResponse.json()
 
-  console.log(snappJSON.data)
-
   response.render('snappmap.liquid', { snapps: snappJSON.data, path: request.path })
 })
+
 
 
 
@@ -107,18 +103,6 @@ app.get('/snapps/user/:uuid', async function (request, response) {
 app.use((req, res) => {
   res.status(404).render('404.liquid')
 })
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -135,5 +119,5 @@ app.set('port', process.env.PORT || 8000)
 // Start Express op, haal daarbij het zojuist ingestelde poortnummer op
 app.listen(app.get('port'), function () {
   // Toon een bericht in de console en geef het poortnummer door
-  console.log(`Application started on http://localhost:${app.get('port')}`)
+  console.log(`Application started on http://localhost:${app.get('port')}/snappmaps`)
 })

@@ -1,14 +1,6 @@
 {% render 'partials/head.liquid', title: 'Homepage' %}
 
 <main>
-  {% comment %}
-    {% if snappmap[0].name %}
-      {% render 'partials/top-navigation.liquid', title: snappmap[0].name, groups: groups %}
-    {% else %}
-      {% render 'partials/top-navigation.liquid', title: snapps[0].location, groups: groups %}
-    {% endif %}
-  {% endcomment %}
-
   {% if path contains 'snappmap' %}
     {% render 'partials/top-navigation.liquid', title: snappmap[0].name, groups: groups %}
   {% elsif path contains 'location' %}

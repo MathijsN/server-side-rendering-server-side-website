@@ -66,9 +66,15 @@ img {
 ul.grid-view {
     display: grid;
     grid-template-columns: repeat(3, 33%);
-    column-gap: 0.5%;
+    gap: 3px 0.5%;
 
+    li {
+        display: contents;
 
+        a {
+            display: contents;
+        }
+    }
 }
 
 nav {
