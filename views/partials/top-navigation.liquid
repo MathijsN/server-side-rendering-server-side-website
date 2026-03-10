@@ -1,21 +1,25 @@
 <nav class="top-nav">
   <ul class="nav-layout">
     <li>
-        <details class="snappmaps-list">
-            <summary>{{ title }}</summary>
-            <ul>
-
-                {% for snappmap in allSnappmaps %}
-                    <li><a href="/snappmaps/filter/{{ snappmap.uuid }}">{{ snappmap.name }}</a></li>
-                {% endfor %}
-            </ul>
-
-        </details>
+      <details class="snappmaps-list">
+        <summary>{{ title }}</summary>
+        <ul>
+          {% for group in groups %}
+            {% for snappmap in group.snappmap %}
+              <li>
+                <a href="/snappmaps/{{ snappmap.snappthis_snapmap_uuid.uuid }}">
+                  {{ snappmap.snappthis_snapmap_uuid.name }}
+                </a>
+              </li>
+            {% endfor %}
+          {% endfor %}
+        </ul>
+      </details>
     </li>
     <li>
-        <button>
-            <img src="/assets/grid-white.svg">
-        </button>
+      <button>
+        <img src="/assets/grid-white.svg">
+      </button>
     </li>
   </ul>
 </nav>

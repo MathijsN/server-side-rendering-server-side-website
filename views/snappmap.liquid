@@ -1,15 +1,34 @@
 {% render 'partials/head.liquid', title: 'Homepage' %}
 
 <main>
-  {% render 'partials/top-navigation.liquid', title: snappmapsFiltered[0].name, allSnappmaps: allSnappmaps %}
+  {% if snappmap[0].name %}
+    {% render 'partials/top-navigation.liquid', title: snappmap[0].name, groups: groups %}
+  {% else %}
+    {% render 'partials/top-navigation.liquid', title: snapps[0].location, groups: groups %}
+  {% endif %}
 
   <ul class="grid-view">
-    {% for snapp in snappmap.snaps %}
+    {% for snappmap in snappmap %}
+      {% for snapp in snappmap.snaps %}
+        <li>
+          <a href="/snapps/snappmap/{{ snapp.uuid }}">
+            <img
+              src="https://fdnd-agency.directus.app/assets/{{ snapp.picture.id }}"
+              alt="Image made in {{ snapp.location }}"
+              loading="lazy"
+            >
+          </a>
+        </li>
+      {% endfor %}
+    {% endfor %}
+
+    {% for snapp in snapps %}
       <li>
-        <a href="/snapps/{{ snapp.uuid }}">
+        <a href="/snapps/snappmap/{{ snapp.uuid }}">
           <img
             src="https://fdnd-agency.directus.app/assets/{{ snapp.picture.id }}"
             alt="Image made in {{ snapp.location }}"
+            loading="lazy"
           >
         </a>
       </li>

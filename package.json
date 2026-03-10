@@ -23,6 +23,8 @@
   "homepage": "https://github.com/fdnd-task/server-side-rendering#readme",
   "dependencies": {
     "express": "latest",
+    "graphql": "^16.13.1",
+    "graphql-http": "^1.22.4",
     "liquidjs": "latest"
   }
 }

@@ -3,14 +3,16 @@
 <main>
   {% render 'partials/top-navigation.liquid', title: snappmapsFiltered[0].name, allSnappmaps: allSnappmaps %}
 
-  <p>{{ group.name }}</p>
-  <ul>
-    {% for snappmap in group.snappmap %}
-      <li>
-        <a href="/snappmaps/{{snappmap.snappthis_snapmap_uuid.uuid}}">{{ snappmap.snappthis_snapmap_uuid.name }}</a>
-      </li>
-    {% endfor %}
-  </ul>
+  {% for group in groups %}
+    <p>{{ group.name }}</p>
+    <ul>
+      {% for snappmap in group.snappmap %}
+        <li>
+          <a href="/snappmaps/{{snappmap.snappthis_snapmap_uuid.uuid}}">{{ snappmap.snappthis_snapmap_uuid.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endfor %}
 
   {% render 'partials/bottom-navigation.liquid' %}
 </main>
