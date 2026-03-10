@@ -13,13 +13,43 @@
 
 :root {
     --color-primary: #172F3B;
+    --color-button-background: #E9ECEE;
     --color-secondary: #fff;
+    --color-secondary-text: #90A1AA;
+
+    --text-size-m: 2rem;
+    --text-size-s: 1.5rem;
+    --text-size-xs: 1rem;
+
     --bar-height: 9vh;
+
+    --spacing-button-inline: 2.688rem;
+    --spacing-button-block: 1.78rem;
+
+    --spacing-m: 1.875rem;
+    --spacing-s: 1rem;
 
 }
 
 body {
     font-family: 'BariolReg';
+    margin-bottom: var(--bar-height);
+
+    font-size: var(--text-size-m);
+}
+
+h1 {
+    color: var(--color-secondary-text);
+    font-size: unset;
+    margin-left: var(--spacing-m);
+    height: var(--bar-height);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    span {
+        margin-right: var(--spacing-s);
+    }
 }
 
 li {
@@ -36,8 +66,9 @@ img {
 ul.grid-view {
     display: grid;
     grid-template-columns: repeat(3, 33%);
-    gap: 0.5%;
-    row-gap: 0;
+    column-gap: 0.5%;
+
+
 }
 
 nav {
@@ -76,7 +107,7 @@ nav {
 
         ul.nav-layout {
             display: grid;
-            grid-template-columns: 10rem 1fr 10rem;
+            grid-template-columns: 5rem 1fr 5rem;
             place-content: center;
             height: 100%;
 
@@ -93,7 +124,12 @@ nav {
             >li:nth-of-type(2) {
                 grid-column: 3/4;
                 text-align: end;
-                margin-right: 10%;
+                margin-right: var(--spacing-m);
+
+                button {
+                    background-color: transparent;
+                    border: none;
+                }
             }
 
         }
@@ -105,6 +141,7 @@ details.snappmaps-list {
 
     summary {
         color: var(--color-secondary);
+        text-wrap: no-wrap;
     }
 
     summary::-webkit-details-marker,
@@ -140,6 +177,30 @@ details.snappmaps-list {
                 text-decoration: none;
                 color: var(--color-secondary);
             }
+        }
+    }
+}
+
+
+ul.snapp-link-list {
+    display: flex;
+    column-gap: 5px;
+    flex-wrap: wrap;
+
+    li {
+        height: 7.8vh;
+        align-content: center;
+        font-size: var(--text-size-s);
+        color: var(--color-secondary-text);
+
+        a {
+            background-color: var(--color-button-background);
+            width: max-content;
+            padding: var(--spacing-button-block) var(--spacing-button-inline);
+            border-radius: var(--spacing-button-inline);
+            color: var(--color-primary);
+            text-decoration: none;
+            font-size: var(--text-size-m);
         }
     }
 }
