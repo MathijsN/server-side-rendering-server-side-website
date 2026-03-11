@@ -194,7 +194,7 @@ ul.snapp-link-list {
     flex-wrap: wrap;
 
     li {
-        height: 7.8vh;
+        height: 13vh;
         align-content: center;
         font-size: var(--text-size-s);
         color: var(--color-secondary-text);
