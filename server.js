@@ -30,7 +30,7 @@ const groupsJSON = await groupsResponse.json()
 
 app.get('/snappmaps', async function (request, response) {
 
-  response.render('snappmaps.liquid', { groups: groupsJSON.data })
+  response.render('snappmaps.liquid', { groups: groupsJSON.data, currentPage: '' })
 })
 
 
@@ -42,7 +42,7 @@ app.get('/snappmaps/:uuid', async function (request, response) {
   const snappmappJSON = await snappmapResponse.json()
   const path = request.path
 
-  response.render('snappmap.liquid', { snappmap: snappmappJSON.data, groups: groupsJSON.data, path: path })
+  response.render('snappmap.liquid', { snappmap: snappmappJSON.data, groups: groupsJSON.data, path: path, currentPage: '' })
 })
 
 
@@ -64,7 +64,7 @@ app.get('/snapps/:location', async function (request, response) {
   const snappsJSON = await snappsResponse.json()
 
 
-  response.render('snappmap.liquid', { snapps: snappsJSON.data })
+  response.render('snappmap.liquid', { snapps: snappsJSON.data, currentPage: 'snappmaps' })
 })
 
 
@@ -73,7 +73,7 @@ app.get('/snapps/snappmap/:uuid', async function (request, response) {
   const snappResponse = await fetch('https://fdnd-agency.directus.app/items/snappthis_snap?fields=*.*&filter[uuid][_eq]=' + request.params.uuid)
   const snappJSON = await snappResponse.json()
 
-  response.render('snapp.liquid', { snapp: snappJSON.data[0], groups: groupsJSON.data, path: request.path })
+  response.render('snapp.liquid', { snapp: snappJSON.data[0], groups: groupsJSON.data, path: request.path, currentPage: '' })
 })
 
 app.get('/snapps/location/:uuid', async function (request, response) {
@@ -81,7 +81,7 @@ app.get('/snapps/location/:uuid', async function (request, response) {
   const snappResponse = await fetch('https://fdnd-agency.directus.app/items/snappthis_snap?fields=*.*&filter[uuid][_eq]=' + request.params.uuid)
   const snappJSON = await snappResponse.json()
 
-  response.render('snapp.liquid', { snapp: snappJSON.data[0], groups: groupsJSON.data, path: request.path })
+  response.render('snapp.liquid', { snapp: snappJSON.data[0], groups: groupsJSON.data, path: request.path, currentPage: '' })
 })
 
 
@@ -90,7 +90,7 @@ app.get('/snapps/user/:uuid', async function (request, response) {
   const snappResponse = await fetch('https://fdnd-agency.directus.app/items/snappthis_snap?fields=*.*&filter[author][uuid][_eq]=' + request.params.uuid)
   const snappJSON = await snappResponse.json()
 
-  response.render('snappmap.liquid', { snapps: snappJSON.data, path: request.path })
+  response.render('snappmap.liquid', { snapps: snappJSON.data, path: request.path, currentPage: '' })
 })
 
 

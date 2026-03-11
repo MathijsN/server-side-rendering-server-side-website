@@ -1,19 +1,19 @@
 <nav class="bottom-nav">
   <ul>
     <li>
-        <a href="/">
-            <img src="/assets/logo.svg">
-        </a>
+      <a href="/">
+        <img src="/assets/logo.svg" class="{% if currentPage == 'snappmaps' %}active{% endif %}">
+      </a>
     </li>
     <li>
-        <a href="#">
-            <img src="/assets/group.svg">
-        </a>
+      <a href="/snappmaps">
+        <img src="/assets/group.svg" class="{% if currentPage == 'groups' %}active{% endif %}">
+      </a>
     </li>
     <li>
-        <a href="#">
-            <img src="/assets/user.svg">
-        </a>
+      <a href="#">
+        <img src="/assets/user.svg">
+      </a>
     </li>
   </ul>
 </nav>

@@ -17,7 +17,7 @@
     --color-secondary: #fff;
     --color-secondary-text: #90A1AA;
 
-    --text-size-m: 2rem;
+    --text-size-m: calc(clamp(1.5rem, 0.583vw + 1.376rem, 2.25rem));
     --text-size-s: 1.5rem;
     --text-size-xs: 1rem;
 
@@ -209,4 +209,8 @@ ul.snapp-link-list {
             font-size: var(--text-size-m);
         }
     }
+}
+
+.active {
+    filter: invert(59%) sepia(97%) saturate(400%) hue-rotate(95deg) brightness(96%) contrast(101%);
 }
